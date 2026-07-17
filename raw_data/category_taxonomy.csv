@@ -1,0 +1,9 @@
+category_id,category_name,description
+cat_01,Travel,Content primarily about travel
+cat_02, Tech  ,Content primarily about tech
+cat_03,Art,Content primarily about art
+cat_04,Fitness,Content primarily about fitness
+cat_05,Food,Content primarily about food
+cat_06,Music,Content primarily about music
+cat_07,Fashion,Content primarily about fashion
+cat_08, Comedy  ,Content primarily about comedy
