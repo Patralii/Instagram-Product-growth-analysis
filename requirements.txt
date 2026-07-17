@@ -1,0 +1,3 @@
+# Used by data/generate_data.py, raw_data/make_messy_data.py, and data_cleaning.py
+pandas>=2.0
+numpy>=1.24
