@@ -2,6 +2,10 @@
 
 *A funnel analysis, an A/B test, and a Discovery equity test, told as one investigation.*
 
+## 🚀 Live Dashboard
+https://dzdbo2ang9v26gyrrhmyde.streamlit.app/
+
+
 > "Before we test anything, we needed to know where Instagram was quietly losing people."
 
 ---
