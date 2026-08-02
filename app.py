@@ -2,9 +2,7 @@ import streamlit as st
 import plotly.graph_objects as go
 import pandas as pd
 
-# ─────────────────────────────────────────────
 # PAGE CONFIG
-# ─────────────────────────────────────────────
 st.set_page_config(
     page_title="Instagram: Funnel, Reels A/B & Discovery Equity",
     page_icon="📊",
@@ -12,9 +10,8 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ─────────────────────────────────────────────
 # PALETTE
-# ─────────────────────────────────────────────
+
 C = {
     "accent": "#c8b5ff", "green": "#5ae4a0", "blue": "#5bc0f8",
     "amber": "#ffb347", "red": "#ff6b6b", "teal": "#4dd9c4",
@@ -56,9 +53,9 @@ def insight(text, kind="info"):
     {"info": st.info, "warning": st.warning, "success": st.success, "error": st.error}[kind](text)
 
 
-# ─────────────────────────────────────────────
+
 # SIDEBAR NAVIGATION (Excluding recommendation through last pages)
-# ─────────────────────────────────────────────
+
 NAV = {
     "Overview": ["Executive Summary"],
     "Part 1 — Funnel": ["The Engagement Funnel"],
@@ -95,9 +92,9 @@ tl, tr = st.columns([4, 1])
 tl.caption(f"Instagram Portfolio · {page}")
 tr.caption("🟢 Ship + Pilot · Apr 2026")
 
-# ══════════════════════════════════════════════════════════════
+
 # EXECUTIVE SUMMARY
-# ══════════════════════════════════════════════════════════════
+
 if page == "Executive Summary":
     header(
         "Should Instagram Expand Reels — and Is Discovery Fair to the New Creators It Creates?",
@@ -142,9 +139,8 @@ if page == "Executive Summary":
         "actually being seen — and found a real but incomplete yes.",
     )
 
-# ══════════════════════════════════════════════════════════════
+
 # THE ENGAGEMENT FUNNEL
-# ══════════════════════════════════════════════════════════════
 elif page == "The Engagement Funnel":
     header(
         "The Engagement Funnel",
@@ -180,9 +176,9 @@ elif page == "The Engagement Funnel":
         kind="warning",
     )
 
-# ══════════════════════════════════════════════════════════════
+
 # EXPERIMENT DESIGN
-# ══════════════════════════════════════════════════════════════
+
 elif page == "Experiment Design":
     header("Experiment Design", "Part 2 — Hypothesis, randomization, metric tiers, power")
     with st.container(border=True):
@@ -220,9 +216,8 @@ elif page == "Experiment Design":
             "(SRM-clean) — smaller than ideal, but every direction and relative-lift finding "
             "reproduces correctly, and the same methodology scales to the full 1.2M-per-arm design.")
 
-# ══════════════════════════════════════════════════════════════
+
 # PRE-LAUNCH CHECKS (SRM)
-# ══════════════════════════════════════════════════════════════
 elif page == "Pre-Launch Checks (SRM)":
     header("Pre-Launch Checks — Sample Ratio Mismatch (SRM)", "Validating randomization before trusting any result")
     kpis([
@@ -252,9 +247,8 @@ elif page == "Pre-Launch Checks (SRM)":
         f.update_layout(barmode="group")
         st.plotly_chart(styled(f, 260), use_container_width=True)
 
-# ══════════════════════════════════════════════════════════════
+
 # PRIMARY METRICS
-# ══════════════════════════════════════════════════════════════
 elif page == "Primary Metrics":
     header("Primary & Secondary Metric Results", "Post-fix results · full 28-day window · SRM-clean sample only")
     kpis([
@@ -275,9 +269,8 @@ elif page == "Primary Metrics":
         kind="success",
     )
 
-# ══════════════════════════════════════════════════════════════
 # THE STORIES EFFECT
-# ══════════════════════════════════════════════════════════════
+
 elif page == "The Stories Effect":
     header(
         "The Stories Effect — The Unexpected Finding",
@@ -309,9 +302,9 @@ elif page == "The Stories Effect":
         kind="success",
     )
 
-# ══════════════════════════════════════════════════════════════
+
 # DURABILITY CHECK
-# ══════════════════════════════════════════════════════════════
+
 elif page == "Durability Check":
     header("Durability Check", "Novelty effect or real behavior change?")
     weeks = ["Week 1", "Week 2", "Week 3", "Week 4"]
@@ -336,9 +329,8 @@ elif page == "Durability Check":
         kind="success",
     )
 
-# ══════════════════════════════════════════════════════════════
+
 # DISCOVERY TEST DESIGN
-# ══════════════════════════════════════════════════════════════
 elif page == "Discovery Test Design":
     header(
         "Discovery Test Design",
@@ -376,9 +368,8 @@ elif page == "Discovery Test Design":
         "metric alongside CTR — is what makes the result defensible to a skeptical stakeholder."
     )
 
-# ══════════════════════════════════════════════════════════════
+
 # RESULTS & CREATOR EQUITY
-# ══════════════════════════════════════════════════════════════
 elif page == "Results & Creator Equity":
     header("Discovery Results & Creator Equity", "CTR and equity moved right. The guardrail needs an honest look.")
     kpis([
@@ -408,10 +399,8 @@ elif page == "Results & Creator Equity":
         "the serendipity injection rate, re-measure before wider rollout.",
         kind="warning",
     )
-
-# ══════════════════════════════════════════════════════════════
+    
 # FUNNEL-LINKED SEGMENTS
-# ══════════════════════════════════════════════════════════════
 elif page == "Funnel-Linked Segments":
     header("Funnel-Linked Segments", "Connecting Part 1 and Part 2")
     st.markdown("**Segment summary**")
