@@ -2,7 +2,7 @@
 --   Did treatment users open (consume) Stories less, as the cannibalization
 --   assumption predicted, and separately, did they POST (create) Stories
 --   more or less?
---
+
 -- WHY IT MATTERS:
 --   This is the query that surfaces the project's headline twist. The
 --   team's working assumption was "more Reels will cannibalize Stories."
@@ -10,7 +10,7 @@
 --   -- rather than one blended "Stories activity" number -- is what reveals
 --   that consumption didn't drop AND creation rose sharply. Collapsing
 --   them into one metric would have hidden the finding entirely.
---
+
 -- APPROACH:
 --   % of users who opened/posted at least once, by variant and event
 --   type, over the full test window. Using % of users (not raw event
