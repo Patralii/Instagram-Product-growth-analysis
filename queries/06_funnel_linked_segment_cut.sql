@@ -11,11 +11,7 @@
 --   broadly, but specifically target the activation nudge at this
 --   segment", a much more useful, defensible answer than the average
 --   alone.
-
--- APPROACH:
---   had_posted_pre_test (set at assignment time, before the test started)
---   is the segment flag. Cross it with variant to get a 2x2 cut, then
---   compare posting rate within each combination.
+.
 SELECT
     ea.variant,
     ea.had_posted_pre_test,
