@@ -1,4 +1,4 @@
--- QUESTION WE'RE ANSWERING:
+-- QUESTION:
 --   Did treatment users open (consume) Stories less, as the cannibalization
 --   assumption predicted -- and separately, did they POST (create) Stories
 --   more or less?
@@ -15,8 +15,6 @@
 --   % of users who opened/posted at least once, by variant and event
 --   type, over the full test window. Using % of users (not raw event
 --   counts) avoids a handful of power-users skewing the picture.
--- ============================================================================
-
 SELECT
     ea.variant,
     se.event_type,
