@@ -1,7 +1,7 @@
 -- QUESTION:
 --   Among users who DO reach each stage, how many days does it typically
 --   take them, measured from signup?
---
+
 -- WHY IT MATTERS:
 --   Conversion rate tells how many people make it. Time-to-convert
 --   tells you about urgency; it defines the window during which an
@@ -10,7 +10,7 @@
 --   convert. A median of 2.3 days to First Post means a "come back and
 --   post!" campaign sent on day 10 is too late for most people who were
 --   ever going to convert quickly.
---
+
 -- APPROACH:
 --   PERCENTILE_CONT gives the median (and could give any other percentile)
 --   directly, rather than approximating with AVG, which is sensitive to a
