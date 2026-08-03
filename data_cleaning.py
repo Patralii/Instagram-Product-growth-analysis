@@ -30,7 +30,7 @@ def clean_categorical(series, valid_values):
 
 
 def clean_boolean(series):
-    """Real datasets almost never store booleans consistently -- this handles
+    """Real datasets almost never store booleans consistently  this handles
     TRUE/FALSE, 1/0, yes/no, Y/N, any casing, extra whitespace, all of it."""
     s = series.astype(str).str.strip().str.lower()
     true_set = {"true", "1", "yes", "y"}
@@ -66,7 +66,7 @@ print("=" * 60)
 print("Cleaning raw data -> data_cleaned/")
 print("=" * 60)
 
-# ---- users ----
+#  users 
 df = pd.read_csv(RAW_DIR + "users.csv", keep_default_na=False, na_values=[""])
 
 df["country"] = df["country"].astype(str).str.strip().str.upper()
@@ -82,13 +82,13 @@ df = dedupe(df, "users", subset=["user_id"])
 df.to_csv(OUT_DIR + "users.csv", index=False)
 print(f"users.csv: {len(df):,} rows")
 
-# ---- funnel_events ----
+#  funnel_events 
 df = pd.read_csv(RAW_DIR + "funnel_events.csv", keep_default_na=False, na_values=[""])
 
 VALID_STAGES = ["signup", "first_post", "first_follow", "dau"]
 df["stage"] = clean_categorical(df["stage"], VALID_STAGES)
 
-# a handful of days_since_signup came in negative -- can't reach a stage
+# a handful of days_since_signup came in negative  can't reach a stage
 # before signing up, so this is clock skew, not a real value. The event
 # itself is still valid, just floor the duration at 0 instead of dropping it.
 n_negative = (df["days_since_signup"] < 0).sum()
@@ -100,7 +100,7 @@ df = dedupe(df, "funnel_events", subset=["event_id"])
 df.to_csv(OUT_DIR + "funnel_events.csv", index=False)
 print(f"funnel_events.csv: {len(df):,} rows")
 
-# ---- experiment_assignments ----
+#  experiment_assignments 
 df = pd.read_csv(RAW_DIR + "experiment_assignments.csv", keep_default_na=False, na_values=[""])
 
 VALID_VARIANTS = ["treatment", "control"]
@@ -110,7 +110,7 @@ df["affected_by_srm_bug"] = clean_boolean(df["affected_by_srm_bug"])
 df["had_posted_pre_test"] = clean_boolean(df["had_posted_pre_test"])
 
 # att_status is blank on some android rows where it should say
-# 'not_applicable' -- ATT is an iOS-only permission, so this isn't
+# 'not_applicable'  ATT is an iOS-only permission, so this isn't
 # missing data, it's a genuine "doesn't apply here" case.
 mask = (df["platform"] == "android") & (df["att_status"].isin(["", None]) | df["att_status"].isna())
 n_filled = mask.sum()
@@ -121,10 +121,10 @@ df = dedupe(df, "experiment_assignments", subset=["user_id"])
 df.to_csv(OUT_DIR + "experiment_assignments.csv", index=False)
 print(f"experiment_assignments.csv: {len(df):,} rows")
 
-# ---- sessions ----
+#  sessions 
 df = pd.read_csv(RAW_DIR + "sessions.csv", keep_default_na=False, na_values=[""])
 
-# negative durations are a clock-skew artifact, not garbage -- take abs value
+# negative durations are a clock-skew artifact, not garbage  take abs value
 n_negative = (df["session_duration_sec"] < 0).sum()
 df.loc[df["session_duration_sec"] < 0, "session_duration_sec"] = \
     df.loc[df["session_duration_sec"] < 0, "session_duration_sec"].abs()
@@ -145,7 +145,7 @@ df = dedupe(df, "sessions", subset=["session_id"])
 df.to_csv(OUT_DIR + "sessions.csv", index=False)
 print(f"sessions.csv: {len(df):,} rows")
 
-# ---- stories_events ----
+#  stories_events 
 df = pd.read_csv(RAW_DIR + "stories_events.csv", keep_default_na=False, na_values=[""])
 
 VALID_EVENT_TYPES = ["open", "post"]
@@ -156,14 +156,14 @@ df = dedupe(df, "stories_events", subset=["event_id"])
 df.to_csv(OUT_DIR + "stories_events.csv", index=False)
 print(f"stories_events.csv: {len(df):,} rows")
 
-# ---- feed_impressions ----
+#  feed_impressions 
 df = pd.read_csv(RAW_DIR + "feed_impressions.csv", keep_default_na=False, na_values=[""])
 
 df["slot_type"] = df["slot_type"].astype(str).str.strip()
 
 # some rows have a blank creator_id (an upstream join failure, most likely).
 # Still valid impressions for overall engagement rate, just can't be used
-# for anything creator-level -- so flag, don't drop.
+# for anything creator-level  so flag, don't drop.
 n_missing_creator = df["creator_id"].isna().sum()
 record("feed_impressions", f"{n_missing_creator} rows have missing creator_id, kept as-is (join failure upstream)")
 
@@ -171,7 +171,7 @@ df = dedupe(df, "feed_impressions", subset=["impression_id"])
 df.to_csv(OUT_DIR + "feed_impressions.csv", index=False)
 print(f"feed_impressions.csv: {len(df):,} rows")
 
-# ---- reel_engagement_events ----
+#  reel_engagement_events 
 df = pd.read_csv(RAW_DIR + "reel_engagement_events.csv", keep_default_na=False, na_values=[""])
 
 VALID_ENGAGEMENT_TYPES = ["like", "comment", "share", "save"]
@@ -181,14 +181,14 @@ df = dedupe(df, "reel_engagement_events", subset=["event_id"])
 df.to_csv(OUT_DIR + "reel_engagement_events.csv", index=False)
 print(f"reel_engagement_events.csv: {len(df):,} rows")
 
-# ---- category_taxonomy ----
+#  category_taxonomy 
 df = pd.read_csv(RAW_DIR + "category_taxonomy.csv", keep_default_na=False, na_values=[""])
 df["category_name"] = df["category_name"].astype(str).str.strip()
 # every downstream join keys off this exact string, so whitespace here is a big deal
 df.to_csv(OUT_DIR + "category_taxonomy.csv", index=False)
 print(f"category_taxonomy.csv: {len(df):,} rows")
 
-# ---- creator_profile ----
+#  creator_profile 
 df = pd.read_csv(RAW_DIR + "creator_profile.csv", keep_default_na=False, na_values=[""])
 
 # follower_count sometimes comes in as '1,234' instead of a plain number
@@ -201,7 +201,7 @@ if n_negative:
 
 # is_new_creator is a stored flag, but it's derived and can drift out of date.
 # Safer to just recompute it from the source columns using the same rule
-# used everywhere else in the project, rather than trust what's on file --
+# used everywhere else in the project, rather than trust what's on file 
 # a stale flag here would quietly throw off the equity metric in query 10.
 df["is_new_creator"] = clean_boolean(df["is_new_creator"])
 recomputed = (df["follower_count"] < 100) | (df["account_age_days"] < 30)
@@ -213,7 +213,7 @@ df = dedupe(df, "creator_profile", subset=["creator_id"])
 df.to_csv(OUT_DIR + "creator_profile.csv", index=False)
 print(f"creator_profile.csv: {len(df):,} rows")
 
-# ---- explore_impressions ----
+#  explore_impressions 
 df = pd.read_csv(RAW_DIR + "explore_impressions.csv", keep_default_na=False, na_values=[""])
 
 df["clicked"] = clean_boolean(df["clicked"])
@@ -225,20 +225,20 @@ df = dedupe(df, "explore_impressions", subset=["impression_id"])
 df.to_csv(OUT_DIR + "explore_impressions.csv", index=False)
 print(f"explore_impressions.csv: {len(df):,} rows")
 
-# ---- summary ----
+#  summary 
 print("\n" + "=" * 60)
 print("CLEANING SUMMARY")
 print("=" * 60)
 for line in log:
     print(" -", line)
 
-# ---- validation: does this actually match the known-good data? ----
+#  validation: does this actually match the known-good data? 
 # A script that runs without errors isn't proof it cleaned things correctly.
 # This compares row counts and a couple of headline metrics against data/,
 # the dataset already used everywhere else in this project. If those line
-# up, the pipeline actually works -- if not, that's a real bug to chase down.
+# up, the pipeline actually works  if not, that's a real bug to chase down.
 print("\n" + "=" * 60)
-print("VALIDATION -- data_cleaned/ vs. data/")
+print("VALIDATION  data_cleaned/ vs. data/")
 print("=" * 60)
 
 tables = ["users", "funnel_events", "experiment_assignments", "sessions",
@@ -249,13 +249,13 @@ print(f"\n{'table':<26}{'data/ rows':>14}{'data_cleaned/ rows':>20}{'match?':>10
 for t in tables:
     gold = pd.read_csv(GOLD_DIR + f"{t}.csv", keep_default_na=False, na_values=[""])
     cleaned = pd.read_csv(OUT_DIR + f"{t}.csv", keep_default_na=False, na_values=[""])
-    # exact match isn't realistic -- cleaning removes duplicates and caps
+    # exact match isn't realistic  cleaning removes duplicates and caps
     # outliers on purpose, so row counts shift a little. Within 1% is fine.
     pct_diff = abs(len(cleaned) - len(gold)) / len(gold) * 100
     status = "OK" if pct_diff < 1.0 else "CHECK"
     print(f"{t:<26}{len(gold):>14,}{len(cleaned):>20,}{status:>10}  ({pct_diff:.2f}% diff)")
 
-print("\n--- headline metric check ---")
+print("\n- headline metric check -")
 
 gold_ea = pd.read_csv(GOLD_DIR + "experiment_assignments.csv", keep_default_na=False, na_values=[""])
 gold_sess = pd.read_csv(GOLD_DIR + "sessions.csv", keep_default_na=False, na_values=[""])
@@ -270,7 +270,7 @@ def time_spent_lift(ea, sess):
 
 gold_lift = time_spent_lift(gold_ea, gold_sess)
 clean_lift = time_spent_lift(clean_ea, clean_sess)
-print(f"Time spent lift -- data/: {gold_lift:+.2f}%, data_cleaned/: {clean_lift:+.2f}%")
+print(f"Time spent lift  data/: {gold_lift:+.2f}%, data_cleaned/: {clean_lift:+.2f}%")
 
 print("\nDone. data_cleaned/ should now line up with the working dataset used")
 print("throughout this project.")
