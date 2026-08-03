@@ -7,15 +7,7 @@
 --   and control are no longer comparable groups, and every other metric
 --   in the project becomes untrustworthy until this is checked and fixed.
 --   This is the validity gate that has to pass BEFORE any of the results
---   queries (04 onward) are worth running.
-
--- APPROACH:
---   Running this query twice in practice: once including all rows, once with
---   affected_by_srm_bug = FALSE. The output (n_users per variant) feeds a
---   chi-square goodness-of-fit test against the expected 50/50 split,
---   computed in whatever analysis tool sits downstream of SQL (Python,
---   Tableau calculated field, or by hand). SQL's job here is just to
---   produce clean counts -- the test itself isn't expressible in SQL.
+--   queries are worth running.
 
 -- Run 1: all assignments, bug included -- this is the version that fails the
 -- chi-square check (treatment and control counts skew apart).
@@ -35,7 +27,7 @@ WHERE affected_by_srm_bug = FALSE
 GROUP BY variant;
 
 -- Supplementary: what % of traffic was affected, broken out by platform and
--- ATT status -- this is what actually pinpoints the bug (a fallback hashing
+-- ATT status; this is what actually pinpoints the bug (a fallback hashing
 -- path that disproportionately hit ATT-denied iOS users).
 SELECT
     platform,
