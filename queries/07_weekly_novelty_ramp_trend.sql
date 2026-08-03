@@ -2,7 +2,7 @@
 --   Does the Reels-engagement lift and the Stories-posting lift behave the
 --   same way over the 4-week test window, or does one decay (a novelty
 --   effect) while the other builds (a habit-forming)?
---
+
 -- WHY IT MATTERS:
 --   A lift measured only at the end of a test can't tell you whether it's
 --   durable. Breaking both metrics out by week is what reveals that Reels
@@ -10,7 +10,7 @@
 --   does the opposite -- which is the evidence that the posting effect is
 --   a real behavior change worth recommending action on, not a curiosity
 --   spike about to vanish.
---
+
 -- APPROACH:
 --   Bucket events into week_number (0-3) relative to the test start, then
 --   compute each metric's rate per week, per variant. Two separate
