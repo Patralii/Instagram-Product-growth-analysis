@@ -2,7 +2,7 @@
 --   When someone posts a Story, how often did they watch a Reel
 --   immediately before it, in the same session -- and does this happen
 --   more in treatment than control?
---
+
 -- WHY IT MATTERS:
 --   A correlation (Reels exposure went up, Stories posting went up) isn't
 --   the same as a mechanism. This query is the closest thing to direct
@@ -10,7 +10,7 @@
 --   systematically preceded by a Reel watch far more often than control
 --   posts are, that's a same-session behavioral sequence pointing at
 --   cause, not just two numbers that happened to move together.
---
+
 -- APPROACH:
 --   preceded_by_reel is set at generation/event-logging time (a session-
 --   level join between Reels and Stories activity, already resolved
