@@ -1,14 +1,14 @@
 -- QUESTION:
 --   Did the 50/50 random assignment actually land at 50/50? And does
 --   excluding the rows flagged by the bucketing-bug investigation fix it?
---
+
 -- WHY IT MATTERS:
 --   A Sample Ratio Mismatch (SRM) means randomization broke treatment
 --   and control are no longer comparable groups, and every other metric
 --   in the project becomes untrustworthy until this is checked and fixed.
 --   This is the validity gate that has to pass BEFORE any of the results
 --   queries (04 onward) are worth running.
---
+
 -- APPROACH:
 --   Running this query twice in practice: once including all rows, once with
 --   affected_by_srm_bug = FALSE. The output (n_users per variant) feeds a
