@@ -1,6 +1,6 @@
 -- QUESTION:
 --   Did treatment users spend more time in the app per day than control
---   users -- the experiment's primary metric?
+--   users, the experiment's primary metric?
 --
 -- WHY IT MATTERS:
 --   This is the metric the whole experiment was powered and pre-registered
