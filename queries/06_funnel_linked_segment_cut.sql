@@ -1,6 +1,6 @@
--- QUESTION WE'RE ANSWERING:
+-- QUESTION:
 --   Is the Stories-posting lift spread evenly across all experiment users,
---   or is it concentrated in the segment who hadn't posted before the
+--   or is it concentrated in the segment that hadn't posted before the
 --   test started, the exact group the Part 1 funnel flagged as stuck?
 --
 -- WHY IT MATTERS:
