@@ -15,7 +15,7 @@
 --   PERCENTILE_CONT gives the median (and could give any other percentile)
 --   directly, rather than approximating with AVG, which is sensitive to a
 --   long right tail of slow converters. This is real PostgreSQL syntax
---   (this project's target engine, per the tech stack) -- it is NOT
+--   (this project's target engine, per the tech stack), it is NOT
 --   supported by SQLite, which has no percentile function at all.
 
 SELECT
@@ -33,12 +33,11 @@ ORDER BY
         WHEN 'dau'          THEN 3
     END;
 
--- ----------------------------------------------------------------------------
+
 -- SQLite-compatible equivalent (for local testing against this project's
 -- sample data only -- PostgreSQL's PERCENTILE_CONT above is the real,
 -- intended version). SQLite has no percentile function, so the median is
 -- approximated here via a windowed row-count midpoint instead.
--- ----------------------------------------------------------------------------
 WITH ranked AS (
     SELECT
         stage,
