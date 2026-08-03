@@ -17,7 +17,6 @@
 --   long right tail of slow converters. This is real PostgreSQL syntax
 --   (this project's target engine, per the tech stack) -- it is NOT
 --   supported by SQLite, which has no percentile function at all.
--- ============================================================================
 
 SELECT
     stage,
