@@ -1,6 +1,6 @@
 -- QUESTION:
 --   Did treatment users open (consume) Stories less, as the cannibalization
---   assumption predicted -- and separately, did they POST (create) Stories
+--   assumption predicted, and separately, did they POST (create) Stories
 --   more or less?
 --
 -- WHY IT MATTERS:
