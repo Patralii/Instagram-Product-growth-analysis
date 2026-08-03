@@ -1,4 +1,4 @@
--- QUESTION WE'RE ANSWERING:
+-- QUESTION:
 --   Did treatment users spend more time in the app per day than control
 --   users -- the experiment's primary metric?
 --
@@ -14,7 +14,6 @@
 --   the confidence interval and significance test (computed downstream,
 --   not in raw SQL) need both. Always filter out SRM-affected rows first --
 --   see 03_srm_bucket_check.sql.
--- ============================================================================
 
 WITH daily_time AS (
     SELECT
