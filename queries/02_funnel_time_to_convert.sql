@@ -14,9 +14,7 @@
 -- APPROACH:
 --   PERCENTILE_CONT gives the median (and could give any other percentile)
 --   directly, rather than approximating with AVG, which is sensitive to a
---   long right tail of slow converters. This is real PostgreSQL syntax
---   (this project's target engine, per the tech stack), it is NOT
---   supported by SQLite, which has no percentile function at all.
+--   long right tail of slow converters.
 
 SELECT
     stage,
