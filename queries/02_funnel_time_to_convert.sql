@@ -1,10 +1,10 @@
--- QUESTION WE'RE ANSWERING:
+-- QUESTION:
 --   Among users who DO reach each stage, how many days does it typically
 --   take them, measured from signup?
 --
 -- WHY IT MATTERS:
---   Conversion rate tells you how many people make it. Time-to-convert
---   tells you about urgency -- it defines the window during which an
+--   Conversion rate tells how many people make it. Time-to-convert
+--   tells you about urgency; it defines the window during which an
 --   intervention (a prompt, an email, a UI nudge) could realistically
 --   still reach someone before they've effectively already decided not to
 --   convert. A median of 2.3 days to First Post means a "come back and
