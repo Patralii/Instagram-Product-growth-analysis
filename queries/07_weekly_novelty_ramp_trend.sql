@@ -1,7 +1,7 @@
 -- QUESTION WE'RE ANSWERING:
 --   Does the Reels-engagement lift and the Stories-posting lift behave the
---   same way over the 4-week test window -- or does one decay (a novelty
---   effect) while the other builds (a habit forming)?
+--   same way over the 4-week test window, or does one decay (a novelty
+--   effect) while the other builds (a habit-forming)?
 --
 -- WHY IT MATTERS:
 --   A lift measured only at the end of a test can't tell you whether it's
@@ -15,9 +15,8 @@
 --   Bucket events into week_number (0-3) relative to the test start, then
 --   compute each metric's rate per week, per variant. Two separate
 --   queries below since they pull from two different tables.
--- ============================================================================
 
--- Weekly Reels engagement rate: engagements / impressions, by week and variant
+-- Weekly Reels engagement rate: engagements/impressions, by week and variant
 SELECT
     CAST((julianday(fi.served_at) - julianday('2026-04-01')) / 7 AS INT) AS week_number,
     ea.variant,
