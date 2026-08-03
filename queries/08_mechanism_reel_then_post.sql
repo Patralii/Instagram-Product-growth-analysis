@@ -16,7 +16,6 @@
 --   level join between Reels and Stories activity, already resolved
 --   upstream into a boolean flag on each post event). This query just
 --   aggregates that flag by variant.
--- ============================================================================
 
 SELECT
     ea.variant,
