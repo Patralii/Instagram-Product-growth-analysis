@@ -2,7 +2,7 @@
 --   Did the Interest-Based Clusters version of Explore/Search (treatment)
 --   get a higher click-through rate than the flat, algorithmic version
 --   (control)?
---
+
 -- WHY IT MATTERS:
 --   This is Part 3's primary metric -- the most basic test of "did
 --   grouping content by topic help people find things they actually
@@ -10,13 +10,11 @@
 --   diversity) needs to be read alongside, not instead of -- a CTR win
 --   that comes from burying new creators even further wouldn't be a real
 --   win for the business question this test was built to answer.
---
+
 -- APPROACH:
---   Simple rate: clicks / impressions, by variant. clicked is stored as a
+--   Simple rate: clicks/impressions, by variant. clicked is stored as a
 --   boolean per impression row, so AVG() of that column directly gives
 --   the click-through rate.
--- ============================================================================
-
 SELECT
     variant,
     COUNT(*)                                AS n_impressions,
