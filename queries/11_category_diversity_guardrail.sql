@@ -2,7 +2,7 @@
 --   Do users in the clustered/treatment version of Explore end up seeing
 --   FEWER distinct content categories per week than users in the flat/
 --   control version -- the "filter bubble" risk?
---
+
 -- WHY IT MATTERS:
 --   Grouping content by interest could backfire by narrowing what people
 --   are exposed to overall, even if they click more within their own
@@ -11,12 +11,11 @@
 --   outside a user's home category) was designed specifically to keep
 --   this number from collapsing -- this query is how we check whether
 --   that mitigation is actually working, not just assumed to be working.
---
+
 -- APPROACH:
 --   COUNT(DISTINCT cluster_category) per user, then average across users
 --   within each variant. A meaningfully lower number in treatment would
 --   be a real finding worth flagging, not waving away.
--- ============================================================================
 
 WITH per_user_diversity AS (
     SELECT
