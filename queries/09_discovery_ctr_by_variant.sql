@@ -7,7 +7,7 @@
 --   This is Part 3's primary metric -- the most basic test of "did
 --   grouping content by topic help people find things they actually
 --   wanted to click." It's the metric every other Part 3 query (equity,
---   diversity) needs to be read alongside, not instead of -- a CTR win
+--   diversity) needs to be read alongside, not instead of a CTR win
 --   that comes from burying new creators even further wouldn't be a real
 --   win for the business question this test was built to answer.
 
