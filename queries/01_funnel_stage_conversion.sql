@@ -3,7 +3,7 @@
 --   How many users reach each stage of Signup -> First Post -> First
 --   Follow -> DAU, and what % of the original signup cohort does each
 --   stage represent?
---
+
 -- WHY IT MATTERS:
 --   This is the single query that produces the project's headline number
 --   (Signup -> First Post drop-off of ~64%). Everything downstream -- the
@@ -11,9 +11,9 @@
 --   recommendation depends on first establishing where the funnel
 --   actually leaks. Get this wrong, and the rest of the narrative has no
 --   foundation.
---
+
 -- APPROACH:
---   funnel_events is a tidy/long table -- one row per user per stage
+--   funnel_events is a tidy/long table, one row per user per stage
 --   reached. Counting DISTINCT user_id per stage, then dividing by the
 --   signup count, gives "% of original cohort still present" at each
 --   stage -- which is the right denominator for a funnel (not the
