@@ -1,4 +1,4 @@
--- QUESTION WE'RE ANSWERING:
+-- QUESTION:
 --   Does the Reels-engagement lift and the Stories-posting lift behave the
 --   same way over the 4-week test window, or does one decay (a novelty
 --   effect) while the other builds (a habit-forming)?
