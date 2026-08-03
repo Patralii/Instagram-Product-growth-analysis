@@ -1,7 +1,7 @@
 -- QUESTION WE'RE ANSWERING:
 --   Is the Stories-posting lift spread evenly across all experiment users,
 --   or is it concentrated in the segment who hadn't posted before the
---   test started -- the exact group the Part 1 funnel flagged as stuck?
+--   test started, the exact group the Part 1 funnel flagged as stuck?
 --
 -- WHY IT MATTERS:
 --   This is the query that connects Part 1 and Part 2. A population-level
@@ -9,15 +9,13 @@
 --   different segments. If the lift is concentrated in never-posted
 --   users, that changes the recommendation from "ship broadly" to "ship
 --   broadly, but specifically target the activation nudge at this
---   segment" -- a much more useful, defensible answer than the average
+--   segment", a much more useful, defensible answer than the average
 --   alone.
 --
 -- APPROACH:
 --   had_posted_pre_test (set at assignment time, before the test started)
 --   is the segment flag. Cross it with variant to get a 2x2 cut, then
 --   compare posting rate within each combination.
--- ============================================================================
-
 SELECT
     ea.variant,
     ea.had_posted_pre_test,
