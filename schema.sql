@@ -1,22 +1,19 @@
--- ============================================================================
 -- schema.sql
--- ============================================================================
--- WHAT: Full data model for the Instagram three-part project --
+-- WHAT: Full data model for the Instagram three-part project 
 --       Part 1 (Funnel), Part 2 (Reels A/B Test), Part 3 (Discovery Equity).
--- WHY:  One schema, ten tables, shared across all three analyses -- this is
+-- WHY:  One schema, ten tables, shared across all three analyses this is
 --       what makes Part 3's "funnel-linked segment" and "did the experiment's
 --       new creators actually get discovered" questions answerable with a
 --       JOIN instead of a separate disconnected dataset per part.
--- LOAD ORDER: tables are listed in dependency order -- run top to bottom so
+-- LOAD ORDER: tables are listed in dependency order  run top to bottom so
 --       foreign keys resolve (e.g. users before funnel_events).
--- ============================================================================
 
--- ----------------------------------------------------------------------------
+
 -- PART 1: FUNNEL TABLES
--- ----------------------------------------------------------------------------
+
 
 -- WHAT: One row per signed-up user.
--- WHY:  The root of the funnel -- every other funnel/experiment table joins
+-- WHY:  The root of the funnel every other funnel/experiment table joins
 --       back to this for cohort definition.
 CREATE TABLE users (
     user_id             VARCHAR(20)   PRIMARY KEY,
@@ -28,7 +25,7 @@ CREATE TABLE users (
 
 -- WHAT: One row per user, per funnel stage reached (signup / first_post /
 --       first_follow / dau). A user who never reaches a stage simply has
---       no row for it -- this is what makes drop-off computable via COUNT.
+--       no row for it this is what makes drop-off computable via COUNT.
 -- WHY:  Tidy/long event format mirrors how real warehouse event tables are
 --       shaped (e.g. Snowflake/BigQuery), and is what the funnel SQL
 --       analyses (01, 02) are written against.
@@ -40,16 +37,16 @@ CREATE TABLE funnel_events (
     days_since_signup    NUMERIC(6,1)  NOT NULL
 );
 
--- ----------------------------------------------------------------------------
+
 -- PART 2: REELS A/B TEST TABLES
--- ----------------------------------------------------------------------------
+
 
 -- WHAT: One row per user enrolled in the Reels density experiment.
 -- WHY:  The anchor table for every Part 2 (and Part 3 cross-reference)
---       query -- variant, SRM-bug flag, and the funnel-linked segment flag
+--       query  variant, SRM-bug flag, and the funnel-linked segment flag
 --       (had_posted_pre_test) all live here.
 CREATE TABLE experiment_assignments (
-    user_id              VARCHAR(20)   PRIMARY KEY,   -- not a FK to users -- separate experiment cohort
+    user_id              VARCHAR(20)   PRIMARY KEY,   -- not a FK to users  separate experiment cohort
     experiment_id        VARCHAR(30)   NOT NULL,       -- 'reels_density_q2_2026'
     variant              VARCHAR(10)   NOT NULL,       -- 'treatment' / 'control'
     assigned_at           TIMESTAMP     NOT NULL,
@@ -74,10 +71,10 @@ CREATE TABLE sessions (
     p50_feed_latency_ms        INT           NOT NULL
 );
 
--- WHAT: One row per Stories interaction -- either an 'open' (consumption)
+-- WHAT: One row per Stories interaction  either an 'open' (consumption)
 --       or a 'post' (creation). preceded_by_reel flags whether the same
 --       session included a Reel watch right before a post.
--- WHY:  This is the single most important table in the project -- it's
+-- WHY:  This is the single most important table in the project  it's
 --       what separates the "Stories went down" assumption from the
 --       "Stories posting went up" finding, and the mechanism check.
 CREATE TABLE stories_events (
@@ -108,12 +105,12 @@ CREATE TABLE reel_engagement_events (
     event_at                   TIMESTAMP     NOT NULL
 );
 
--- ----------------------------------------------------------------------------
+
 -- PART 3: DISCOVERY EQUITY TABLES
--- ----------------------------------------------------------------------------
+
 
 -- WHAT: The cluster definitions used in the Explore/Search treatment arm.
--- WHY:  Lookup table -- keeps category names consistent and queryable
+-- WHY:  Lookup table  keeps category names consistent and queryable
 --       rather than hardcoded strings scattered across other tables.
 CREATE TABLE category_taxonomy (
     category_id            VARCHAR(10)   PRIMARY KEY,
@@ -121,7 +118,7 @@ CREATE TABLE category_taxonomy (
     description                VARCHAR(100)
 );
 
--- WHAT: One row per creator, with follower count and account age -- the
+-- WHAT: One row per creator, with follower count and account age  the
 --       fields needed to define "new/small creator" (the equity question).
 -- WHY:  Without follower_count and account_age_days, there's no way to
 --       check whether Discovery is actually surfacing new creators or just
@@ -134,7 +131,7 @@ CREATE TABLE creator_profile (
     is_new_creator             BOOLEAN       NOT NULL    -- follower_count < 100 OR account_age_days < 30
 );
 
--- WHAT: One row per Explore/Search impression -- which variant, which
+-- WHAT: One row per Explore/Search impression  which variant, which
 --       cluster, which creator was shown, and whether the user clicked.
 -- WHY:  This is the table every Part 3 analysis runs against: CTR by
 --       variant, % of clicks to new creators (the equity metric), and
@@ -150,7 +147,7 @@ CREATE TABLE explore_impressions (
 );
 
 -- NOTE: cluster_category stores the category name directly rather than a
--- formal FK to category_taxonomy (which is keyed on category_id) -- this
+-- formal FK to category_taxonomy (which is keyed on category_id)  this
 -- keeps the table queryable without an extra join for the common case.
 -- A production schema would add a UNIQUE constraint on category_name and
 -- a proper FK here instead.
