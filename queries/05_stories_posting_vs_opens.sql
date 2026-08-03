@@ -7,7 +7,7 @@
 --   This is the query that surfaces the project's headline twist. The
 --   team's working assumption was "more Reels will cannibalize Stories."
 --   Treating "Stories opens" and "Stories posts" as two separate metrics
---   -- rather than one blended "Stories activity" number -- is what reveals
+--   -- rather than one blended "Stories activity" number is what reveals
 --   that consumption didn't drop AND creation rose sharply. Collapsing
 --   them into one metric would have hidden the finding entirely.
 
