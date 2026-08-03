@@ -1,5 +1,5 @@
 
--- QUESTION WE'RE ANSWERING:
+-- QUESTION:
 --   How many users reach each stage of Signup -> First Post -> First
 --   Follow -> DAU, and what % of the original signup cohort does each
 --   stage represent?
@@ -8,8 +8,8 @@
 --   This is the single query that produces the project's headline number
 --   (Signup -> First Post drop-off of ~64%). Everything downstream -- the
 --   business case for testing Reels, the targeting logic in the
---   recommendation -- depends on first establishing where the funnel
---   actually leaks. Get this wrong and the rest of the narrative has no
+--   recommendation depends on first establishing where the funnel
+--   actually leaks. Get this wrong, and the rest of the narrative has no
 --   foundation.
 --
 -- APPROACH:
@@ -19,7 +19,6 @@
 --   stage -- which is the right denominator for a funnel (not the
 --   previous stage's count, which would hide how much has been lost
 --   overall).
--- ============================================================================
 
 WITH stage_counts AS (
     SELECT
