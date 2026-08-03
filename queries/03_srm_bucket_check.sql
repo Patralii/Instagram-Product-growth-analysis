@@ -9,7 +9,7 @@
 --   This is the validity gate that has to pass BEFORE any of the results
 --   queries are worth running.
 
--- Run 1: all assignments, bug included -- this is the version that fails the
+-- Run 1: all assignments, bug included; this is the version that fails the
 -- chi-square check (treatment and control counts skew apart).
 SELECT
     variant,
