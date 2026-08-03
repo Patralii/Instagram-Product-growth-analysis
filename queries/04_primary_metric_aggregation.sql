@@ -1,13 +1,13 @@
 -- QUESTION:
 --   Did treatment users spend more time in the app per day than control
 --   users, the experiment's primary metric?
---
+
 -- WHY IT MATTERS:
 --   This is the metric the whole experiment was powered and pre-registered
 --   to detect. Everything else (engagement rate, Stories effects,
 --   guardrails) is secondary to whether this number moved, and by how
 --   much, with what confidence.
---
+
 -- APPROACH:
 --   Aggregate session_duration_sec per user per day, then average across
 --   users within each variant. STDDEV is pulled alongside the mean because
