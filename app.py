@@ -97,7 +97,7 @@ tr.caption("🟢 Ship + Pilot · Apr 2026")
 
 if page == "Executive Summary":
     header(
-        "Should Instagram Expand Reels — and Is Discovery Fair to the New Creators It Creates?",
+        "Should Instagram Expand Reels - and Is Discovery Fair to the New Creators It Creates?",
         "Funnel (50,000 signups) · Reels A/B test (9,000 users, 28 days) · Discovery equity test (10,000 users)",
         hook="Before we test anything, we needed to know where Instagram was quietly losing people.",
     )
